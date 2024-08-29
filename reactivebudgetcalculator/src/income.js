@@ -15,6 +15,9 @@ const InputLine = styled.dl`
   justify-content: space-between;
   gap: 10px;
   margin-bottom: 20px;
+  @media (max-width: 720px) {
+    flex-direction: column;
+  }
 `;
 
 const InputinCover = ({ className, children, name, value, onChange }) => (

@@ -13,6 +13,7 @@ const HeaderTitle = ({ className, children }) => (
 const HeaderTtileStyle = styled(HeaderTitle)`
   font-size: 3rem;
   font-weight: bold;
+  text-align: center;
 `;
 
 const Container = styled.div`
@@ -22,6 +23,10 @@ const Container = styled.div`
   padding-right: ${paddingContainer}px;
   padding-left: ${paddingContainer}px;
   margin-top: 20px;
+  @media (max-width: 720px) {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
 `;
 
 const Wrapper = styled.div`
@@ -33,10 +38,38 @@ const Wrapper = styled.div`
     display: flex;
     flex-wrap: nowrap;
   }
+  @media (max-width: 720px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    > div {
+      justify-content: flex-end;
+    }
+  }
+`;
+
+const Separeator = ({ className }) => <span className={className}>|</span>;
+
+const SepareatorStyle = styled(Separeator)`
+  font-weight: bold;
+  @media (max-width: 720px) {
+    display: none;
+  }
+`;
+
+const ResultLine = styled.div`
+  display: flex;
+  @media (max-width: 720px) {
+    flex-direction: column;
+    align-self: center;
+  }
 `;
 
 const Result = styled.span`
   font-weight: bold;
+  @media (max-width: 720px) {
+    text-align: center;
+  }
 `;
 
 const sizeBTN = 32;
@@ -131,8 +164,19 @@ export const Label = ({ className, children }) => (
   <p className={className}>{children}:</p>
 );
 
+const DateLabel = styled(Label)`
+  white-space: nowrap;
+  @media (max-width: 720px) {
+    font-size: 1rem;
+  }
+`;
+
 const AppLabel = styled(Label)`
-  margin-right: 20px !important;
+  margin-right: 20px;
+  @media (max-width: 720px) {
+    margin-right: 0px;
+    font-size: 1rem;
+  }
 `;
 
 const Table = styled.table`
@@ -140,6 +184,9 @@ const Table = styled.table`
   grid-template-columns: 1fr 1fr auto;
   text-align: end;
   gap: 10px;
+  @media (max-width: 720px) {
+    gap: 5px;
+  }
 `;
 
 class App extends Component {
@@ -247,14 +294,18 @@ class App extends Component {
         <main>
           <Container>
             <Wrapper>
-              <Label>Выбранная дата</Label>
-              <div>{date.format("DD.MM.YYYY")}</div>|<Label>Сегодня</Label>
+              <DateLabel>Выбранная дата</DateLabel>
+              <div>{date.format("DD.MM.YYYY")}</div>
+              <SepareatorStyle />
+              <DateLabel>Сегодня</DateLabel>
               <div>{moment().format("DD.MM.YYYY")}</div>
             </Wrapper>
           </Container>
           <Container>
-            <AppLabel>Сегодня можно потратить</AppLabel>
-            <Result>{this.onToday()}₽</Result>
+            <ResultLine>
+              <AppLabel>Сегодня можно потратить</AppLabel>
+              <Result>{this.onToday()}₽</Result>
+            </ResultLine>
           </Container>
           <Container>
             <DateButton onClick={this.handleSubtractDay}>+</DateButton>
