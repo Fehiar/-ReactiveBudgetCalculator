@@ -81,6 +81,10 @@ const DateButton = styled.button`
   background-color: transparent;
   width: ${sizeBTN}px;
   height: ${sizeBTN}px;
+  @media (max-width: 720px) {
+    width: 40px;
+    height: 40px;
+  }
   margin: 3px;
   cursor: pointer;
   text-align: center;
@@ -92,8 +96,8 @@ const DateButton = styled.button`
   &::after {
     content: "";
     display: block;
-    width: ${sizeBTN}px;
-    height: ${sizeBTN}px;
+    width: 100%;
+    height: 100%;
     background-color: white;
     position: absolute;
     top: 0;
@@ -294,11 +298,11 @@ class App extends Component {
         <main>
           <Container>
             <Wrapper>
-              <DateLabel>Выбранная дата</DateLabel>
-              <div>{date.format("DD.MM.YYYY")}</div>
-              <SepareatorStyle />
               <DateLabel>Сегодня</DateLabel>
               <div>{moment().format("DD.MM.YYYY")}</div>
+              <SepareatorStyle />
+              <DateLabel>Выбранная дата</DateLabel>
+              <div>{date.format("DD.MM.YYYY")}</div>
             </Wrapper>
           </Container>
           <Container>
@@ -314,18 +318,18 @@ class App extends Component {
           <Container>
             <Nav>
               <Link
-                name="expenses"
-                onClick={this.handleNavClick}
-                selected={navSelected === "expenses"}
-              >
-                Расходы
-              </Link>
-              <Link
                 name="income"
                 onClick={this.handleNavClick}
                 selected={navSelected === "income"}
               >
                 Доходы
+              </Link>
+              <Link
+                name="expenses"
+                onClick={this.handleNavClick}
+                selected={navSelected === "expenses"}
+              >
+                Расходы
               </Link>
             </Nav>
           </Container>
