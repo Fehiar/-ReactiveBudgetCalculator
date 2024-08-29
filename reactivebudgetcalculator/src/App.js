@@ -312,8 +312,8 @@ class App extends Component {
             </ResultLine>
           </Container>
           <Container>
-            <DateButton onClick={this.handleSubtractDay}>+</DateButton>
-            <DateButton onClick={this.handleAddDay}>-</DateButton>
+            <DateButton onClick={this.handleSubtractDay}>-</DateButton>
+            <DateButton onClick={this.handleAddDay}>+</DateButton>
           </Container>
           <Container>
             <Nav>
